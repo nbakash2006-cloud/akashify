@@ -1,166 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Akashify ⚡</title>
+<title>Akashify 🚀</title>
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: #0f0f0f;
-    color: white;
-}
-
-/* HEADER */
-header {
-    text-align: center;
-    padding: 20px;
-    font-size: 28px;
-    color: #00f7ff;
-}
-
-/* CARD */
-.card {
-    background: #1a1a1a;
-    padding: 15px;
-    margin: 15px;
-    border-radius: 12px;
-}
-
-/* INPUT */
-input, textarea, select {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 8px;
-    border: none;
-}
-
-/* BUTTON */
-button {
-    padding: 10px;
-    margin-top: 5px;
-    border: none;
-    border-radius: 8px;
-    background: #00f7ff;
-    cursor: pointer;
-}
-
-/* POSTS */
-.post {
-    background: #1a1a1a;
-    margin: 15px;
-    padding: 15px;
-    border-radius: 12px;
-}
-
-.completed {
-    text-decoration: line-through;
-    opacity: 0.6;
-}
-
-/* TAG COLORS */
-.tag {
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-}
-
-.math { background: red; }
-.programming { background: #00f7ff; color:black; }
-.biology { background: green; }
-
-/* SEARCH */
-#search {
-    margin: 15px;
-    padding: 10px;
-    width: 90%;
-}
-
-/* LANGUAGE BAR */
-.lang-box {
-    background: #1a1a1a;
-    padding: 15px;
-    margin: 15px;
-    border-radius: 12px;
-}
-
-.bar {
-    display: flex;
-    height: 12px;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.js { background: #f1e05a; width:98.5%; }
-.css { background: #563d7c; width:1.3%; }
-.html { background: #e34c26; width:0.2%; }
-
-.labels {
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.dot {
-    height: 10px;
-    width: 10px;
-    display: inline-block;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-
-.dot.js { background:#f1e05a; }
-.dot.css { background:#563d7c; }
-.dot.html { background:#e34c26; }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>⚡ Akashify</header>
+<header>⚡ Akashify Pro</header>
 
-<!-- ADD TASK -->
-<div class="card">
-<h2>Add Task</h2>
+<div class="box">
+    <input id="title" placeholder="Title">
+    <textarea id="content" placeholder="Write..."></textarea>
 
-<input id="title" placeholder="Title">
-<textarea id="content" placeholder="Write..."></textarea>
+    <select id="category">
+        <option>Work</option>
+        <option>Study</option>
+        <option>Personal</option>
+    </select>
 
-<select id="category">
-<option value="math">Math</option>
-<option value="programming">Programming</option>
-<option value="biology">Biology</option>
-</select>
-
-<button onclick="addPost()">Add</button>
+    <button onclick="addPost()">Add Task</button>
 </div>
 
-<!-- SEARCH -->
-<input id="search" placeholder="Search..." onkeyup="displayPosts()">
+<input id="search" placeholder="Search..." onkeyup="render()">
 
-<!-- POSTS -->
+<div id="stats"></div>
+
 <div id="posts"></div>
 
-<!-- LANGUAGE BAR -->
-<div class="lang-box">
-<h3>Languages</h3>
+<div id="toast"></div>
 
-<div class="bar">
-    <div class="js"></div>
-    <div class="css"></div>
-    <div class="html"></div>
-</div>
-
-<div class="labels">
-    <div><span class="dot js"></span> JavaScript 98.5%</div>
-    <div><span class="dot css"></span> CSS 1.3%</div>
-    <div><span class="dot html"></span> HTML 0.2%</div>
-</div>
-</div>
-
-<!-- LINK JS FILE -->
 <script src="script.js"></script>
 
 </body>
