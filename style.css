@@ -1,63 +1,23 @@
-body{
-    background:#0f0f0f;
-    color:white;
-    font-family:sans-serif;
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  text-align: center;
 }
 
-header{
-    text-align:center;
-    font-size:28px;
-    color:#00f7ff;
-    margin:20px;
+.container {
+  margin-top: 50px;
 }
 
-.box{
-    background:#1a1a1a;
-    padding:15px;
-    margin:15px;
-    border-radius:10px;
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
 }
 
-input,textarea,select{
-    width:100%;
-    margin:5px 0;
-    padding:10px;
-    border-radius:8px;
-    border:none;
-}
-
-button{
-    background:#00f7ff;
-    border:none;
-    padding:10px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.post{
-    background:#1a1a1a;
-    margin:10px;
-    padding:10px;
-    border-radius:10px;
-}
-
-.done{
-    text-decoration:line-through;
-    opacity:0.5;
-}
-
-#toast{
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#00f7ff;
-    color:black;
-    padding:10px;
-    border-radius:8px;
-    opacity:0;
-}
-
-.show{
-    opacity:1;
+button {
+  padding: 10px;
+  border-radius: 10px;
+  background: #22c55e;
+  color: white;
 }
