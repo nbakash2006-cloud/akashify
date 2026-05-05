@@ -1,2 +1,60 @@
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akashify ⚡</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>⚡ Akashify Pro</header>
+
+<!-- ADD TASK -->
+<div class="card">
+    <h2>Add Task</h2>
+
+    <input id="title" placeholder="Task title">
+    <textarea id="content" placeholder="Write details..."></textarea>
+
+    <select id="category">
+        <option value="study">Study</option>
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+    </select>
+
+    <button onclick="addPost()">Add Task</button>
+</div>
+
+<!-- SEARCH -->
+<input id="search" placeholder="Search tasks..." onkeyup="render()">
+
+<!-- FILTER -->
+<div class="filters">
+    <button onclick="filterTasks('all')">All</button>
+    <button onclick="filterTasks('study')">Study</button>
+    <button onclick="filterTasks('work')">Work</button>
+    <button onclick="filterTasks('personal')">Personal</button>
+</div>
+
+<!-- STATS -->
+<div id="stats"></div>
+
+<!-- POSTS -->
+<div id="posts"></div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- FOOTER -->
+<footer>
+    <p>⚡ Akashify • Stay Productive</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
