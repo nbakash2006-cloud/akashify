@@ -6,118 +6,114 @@
 <title>Akashify ⚡</title>
 
 <style>
-/* ===== GLOBAL ===== */
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle at top, #0a0a0a, #000);
-    color: #fff;
+    font-family: Arial;
+    background: #0f0f0f;
+    color: white;
 }
 
+/* HEADER */
 header {
     text-align: center;
-    font-size: 28px;
     padding: 20px;
+    font-size: 28px;
     color: #00f7ff;
-    font-weight: bold;
 }
 
-/* ===== CARD ===== */
+/* CARD */
 .card {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-    margin: 15px;
+    background: #1a1a1a;
     padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,255,255,0.1);
+    margin: 15px;
+    border-radius: 12px;
 }
 
-/* ===== INPUT ===== */
+/* INPUT */
 input, textarea, select {
     width: 100%;
-    margin: 5px 0;
     padding: 10px;
+    margin: 5px 0;
     border-radius: 8px;
     border: none;
-    outline: none;
 }
 
-/* ===== BUTTON ===== */
+/* BUTTON */
 button {
-    padding: 8px 12px;
+    padding: 10px;
+    margin-top: 5px;
     border: none;
     border-radius: 8px;
     background: #00f7ff;
     cursor: pointer;
-    margin: 5px;
 }
 
-button:hover {
-    transform: scale(1.05);
-}
-
-/* ===== TASK CARD ===== */
+/* POSTS */
 .post {
+    background: #1a1a1a;
     margin: 15px;
     padding: 15px;
-    border-radius: 15px;
-    background: rgba(255,255,255,0.05);
-    box-shadow: 0 0 10px rgba(0,255,255,0.1);
+    border-radius: 12px;
 }
 
 .completed {
-    opacity: 0.5;
     text-decoration: line-through;
+    opacity: 0.6;
 }
 
-/* ===== PRIORITY ===== */
-.high { border-left: 5px solid red; }
-.medium { border-left: 5px solid orange; }
-.low { border-left: 5px solid green; }
-
-/* ===== TAG ===== */
+/* TAG COLORS */
 .tag {
-    padding: 4px 10px;
-    border-radius: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
     font-size: 12px;
 }
 
-.math { background:red; }
-.programming { background:#00f7ff; color:black; }
-.biology { background:green; }
+.math { background: red; }
+.programming { background: #00f7ff; color:black; }
+.biology { background: green; }
 
-/* ===== STATS ===== */
-.stats {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-}
-
-.stats div {
-    background: rgba(255,255,255,0.05);
-    padding: 10px;
-    border-radius: 10px;
-    width: 30%;
-}
-
-/* ===== SEARCH ===== */
+/* SEARCH */
 #search {
-    width: 90%;
     margin: 15px;
     padding: 10px;
+    width: 90%;
 }
 
-/* ===== FILTER ===== */
-.filters {
-    text-align: center;
+/* LANGUAGE BAR */
+.lang-box {
+    background: #1a1a1a;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 12px;
 }
 
-/* ===== FOOTER ===== */
-footer {
-    text-align: center;
-    padding: 20px;
-    opacity: 0.5;
+.bar {
+    display: flex;
+    height: 12px;
+    border-radius: 10px;
+    overflow: hidden;
 }
+
+.js { background: #f1e05a; width:98.5%; }
+.css { background: #563d7c; width:1.3%; }
+.html { background: #e34c26; width:0.2%; }
+
+.labels {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.dot.js { background:#f1e05a; }
+.dot.css { background:#563d7c; }
+.dot.html { background:#e34c26; }
 </style>
 </head>
 
@@ -138,145 +134,34 @@ footer {
 <option value="biology">Biology</option>
 </select>
 
-<input type="date" id="date">
-
-<select id="priority">
-<option value="high">🔥 High</option>
-<option value="medium">⚡ Medium</option>
-<option value="low">🌿 Low</option>
-</select>
-
 <button onclick="addPost()">Add</button>
 </div>
 
 <!-- SEARCH -->
 <input id="search" placeholder="Search..." onkeyup="displayPosts()">
 
-<!-- FILTER -->
-<div class="filters">
-<button onclick="filterTasks('all')">All</button>
-<button onclick="filterTasks('math')">Math</button>
-<button onclick="filterTasks('programming')">Programming</button>
-<button onclick="filterTasks('biology')">Biology</button>
-</div>
-
-<!-- STATS -->
-<div class="card stats">
-<div>Total<br><span id="total">0</span></div>
-<div>Done<br><span id="done">0</span></div>
-<div>Pending<br><span id="pending">0</span></div>
-</div>
-
 <!-- POSTS -->
 <div id="posts"></div>
 
-<footer>⚡ Stay Productive</footer>
+<!-- LANGUAGE BAR -->
+<div class="lang-box">
+<h3>Languages</h3>
 
-<script>
-// 🔔 Notification permission
-if ("Notification" in window) {
-    Notification.requestPermission();
-}
+<div class="bar">
+    <div class="js"></div>
+    <div class="css"></div>
+    <div class="html"></div>
+</div>
 
-let filter = "all";
+<div class="labels">
+    <div><span class="dot js"></span> JavaScript 98.5%</div>
+    <div><span class="dot css"></span> CSS 1.3%</div>
+    <div><span class="dot html"></span> HTML 0.2%</div>
+</div>
+</div>
 
-// ADD
-function addPost(){
-    let title = document.getElementById("title").value;
-    let content = document.getElementById("content").value;
-    let category = document.getElementById("category").value;
-    let date = document.getElementById("date").value;
-    let priority = document.getElementById("priority").value;
-
-    if(!title || !content) return alert("Fill all fields");
-
-    let posts = JSON.parse(localStorage.getItem("posts")) || [];
-
-    posts.push({title,content,category,date,priority,done:false});
-
-    localStorage.setItem("posts",JSON.stringify(posts));
-    displayPosts();
-}
-
-// DISPLAY
-function displayPosts(){
-    let posts = JSON.parse(localStorage.getItem("posts")) || [];
-    let search = document.getElementById("search").value.toLowerCase();
-
-    let output = "";
-    let doneCount = 0;
-
-    posts.forEach((p,i)=>{
-        if(p.done) doneCount++;
-
-        if(!p.title.toLowerCase().includes(search)) return;
-        if(filter !== "all" && p.category !== filter) return;
-
-        output += `
-        <div class="post ${p.done?'completed':''} ${p.priority}">
-            <span class="tag ${p.category}">${p.category}</span>
-            <h3>${p.title}</h3>
-            <p>${p.content}</p>
-            <small>📅 ${p.date || "No date"}</small>
-
-            <br>
-
-            <button onclick="markDone(${i})">✔</button>
-            <button onclick="remind(${i})">🔔</button>
-            <button onclick="deletePost(${i})">❌</button>
-        </div>`;
-    });
-
-    document.getElementById("posts").innerHTML = output;
-
-    document.getElementById("total").innerText = posts.length;
-    document.getElementById("done").innerText = doneCount;
-    document.getElementById("pending").innerText = posts.length - doneCount;
-}
-
-// DONE
-function markDone(i){
-    let posts = JSON.parse(localStorage.getItem("posts"));
-    posts[i].done = !posts[i].done;
-    localStorage.setItem("posts",JSON.stringify(posts));
-    displayPosts();
-}
-
-// DELETE
-function deletePost(i){
-    let posts = JSON.parse(localStorage.getItem("posts"));
-    posts.splice(i,1);
-    localStorage.setItem("posts",JSON.stringify(posts));
-    displayPosts();
-}
-
-// FILTER
-function filterTasks(cat){
-    filter = cat;
-    displayPosts();
-}
-
-// 🔔 REMINDER
-function remind(i){
-    let time = prompt("Remind after minutes?");
-    if(!time) return;
-
-    let posts = JSON.parse(localStorage.getItem("posts"));
-    let delay = parseInt(time) * 60000;
-
-    setTimeout(()=>{
-        if(Notification.permission==="granted"){
-            new Notification("🔔 Reminder",{body:posts[i].title});
-        } else {
-            alert(posts[i].title);
-        }
-    },delay);
-
-    alert("Reminder set!");
-}
-
-window.onload = displayPosts;
-</script>
+<!-- LINK JS FILE -->
+<script src="script.js"></script>
 
 </body>
 </html>
