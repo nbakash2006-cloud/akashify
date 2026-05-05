@@ -1,23 +1,27 @@
-body {
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
-  text-align: center;
+/* LANGUAGE BAR */
+.lang-box {
+    background: #1a1a1a;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 12px;
 }
 
-.container {
-  margin-top: 50px;
+.bar {
+    display: flex;
+    height: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
 }
 
-input {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
+.js { background: #f1e05a; width:98.5%; }
+.css { background: #563d7c; width:1.3%; }
+.html { background: #e34c26; width:0.2%; }
+
+.labels {
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-button {
-  padding: 10px;
-  border-radius: 10px;
-  background: #22c55e;
-  color: white;
-}
+.dot {
+    height: 10
