@@ -1,263 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akashify - Task Manager</title>
-    <style>
-        /* CSS: Styling and UI Improvements */
-        :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --input-bg: #2a2a2a;
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --primary: #00d2ff;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akashify ⚡</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00f7ff">
 
-        .container {
-            width: 100%;
-            max-width: 600px; /* Keeps it looking good on large screens */
-        }
+<link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins&display=swap" rel="stylesheet">
 
-        h1 {
-            text-align: center;
-            color: var(--primary);
-            margin-bottom: 30px;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins';
+    background: #0f0f0f;
+    color: white;
+}
 
-        /* Form styling with softer dark inputs */
-        .add-task-section {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
+/* HEADER */
+header {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Orbitron';
+    color: #00f7ff;
+}
 
-        .add-task-section h2 { margin-top: 0; font-size: 1.2rem; }
+/* CARD */
+.card, .post {
+    background: #1a1a1a;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #00f7ff44;
+}
 
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            background-color: var(--input-bg);
-            border: 1px solid #444;
-            color: var(--text-main);
-            border-radius: 6px;
-            box-sizing: border-box; /* Ensures padding doesn't break width */
-        }
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: none;
+    background: #111;
+    color: white;
+}
 
-        input::placeholder, textarea::placeholder { color: var(--text-muted); }
-        textarea { resize: vertical; min-height: 60px; }
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #00f7ff;
+    cursor: pointer;
+}
 
-        .btn-add {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--primary);
-            color: #000;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        .btn-add:hover { opacity: 0.8; }
+/* POSTS */
+.post:hover {
+    box-shadow: 0 0 15px #00f7ff;
+}
 
-        /* Search Bar */
-        .search-bar { margin-bottom: 20px; }
+.completed {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
 
-        /* Task Cards */
-        .task-list { display: flex; flex-direction: column; gap: 15px; }
+/* TAGS */
+.tag { padding:5px 10px; border-radius:20px; font-size:12px; }
+.math { background:red; }
+.programming { background:#00f7ff; color:black; }
+.biology { background:green; }
 
-        .task-card {
-            background-color: var(--card-bg);
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 5px solid var(--primary);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .task-card.completed {
-            opacity: 0.6;
-            border-left-color: var(--success);
-        }
-
-        .task-card.completed h3 { text-decoration: line-through; }
-
-        .tag {
-            display: inline-block;
-            background-color: #dc3545; /* Red like in your screenshot */
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .task-title { margin: 0 0 5px 0; font-size: 1.2rem; }
-        .task-desc { margin: 0 0 15px 0; color: var(--text-muted); font-size: 0.9rem; }
-
-        /* Semantic Action Buttons */
-        .task-actions { display: flex; gap: 10px; }
-        
-        .action-btn {
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            color: #000;
-            font-weight: bold;
-        }
-
-        .btn-done { background-color: var(--success); color: white; }
-        .btn-edit { background-color: var(--warning); }
-        .btn-delete { background-color: var(--danger); color: white; }
-
-        .empty-state {
-            text-align: center;
-            color: var(--text-muted);
-            margin-top: 40px;
-        }
-    </style>
+/* LIGHT MODE */
+.light {
+    background: white;
+    color: black;
+}
+.light .card, .light .post {
+    background: #eee;
+    color: black;
+}
+</style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>⚡ Akashify</h1>
+<header>⚡ Akashify</header>
 
-    <div class="add-task-section">
-        <h2>Add Task</h2>
-        <input type="text" id="taskTitle" placeholder="Title">
-        <textarea id="taskDesc" placeholder="Write..."></textarea>
-        <input type="text" id="taskTag" placeholder="Tag (e.g., Math, Science)">
-        <button class="btn-add" onclick="addTask()">Add</button>
-    </div>
+<div class="card">
+<h2>Add Task 🚀</h2>
 
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search tasks..." onkeyup="searchTasks()">
-    </div>
+<input id="title" placeholder="Task title">
+<textarea id="content" placeholder="Write..."></textarea>
 
-    <div id="taskList" class="task-list">
-        </div>
+<select id="category">
+<option value="math">Math</option>
+<option value="programming">Programming</option>
+<option value="biology">Biology</option>
+</select>
+
+<button onclick="addPost()">Add</button>
+<button onclick="toggleTheme()">🎨 Theme</button>
 </div>
 
+<input id="search" placeholder="Search..." onkeyup="displayPosts()" style="margin:15px; padding:10px; width:90%;">
+
+<div id="posts"></div>
+
 <script>
-    // JavaScript: Functionality and Local Storage
+// SERVICE WORKER
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+}
 
-    // 1. Load tasks from Local Storage or start with an empty array
-    let tasks = JSON.parse(localStorage.getItem('akashifyTasks')) || [];
+// NOTIFICATION PERMISSION
+if ("Notification" in window) {
+    Notification.requestPermission();
+}
 
-    // Render tasks immediately on page load
-    renderTasks();
+let editIndex = -1;
 
-    function saveTasks() {
-        // Save the current tasks array to the browser's local storage
-        localStorage.setItem('akashifyTasks', JSON.stringify(tasks));
+// ADD POST
+function addPost() {
+    let title = titleInput.value;
+    let content = contentInput.value;
+    let category = categoryInput.value;
+
+    if(!title || !content) return alert("Fill everything");
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+    if(editIndex === -1) {
+        posts.push({title, content, category, done:false});
+    } else {
+        posts[editIndex] = {title, content, category, done:false};
+        editIndex = -1;
     }
 
-    function addTask() {
-        const titleInput = document.getElementById('taskTitle');
-        const descInput = document.getElementById('taskDesc');
-        const tagInput = document.getElementById('taskTag');
+    localStorage.setItem("posts", JSON.stringify(posts));
+    titleInput.value = "";
+    contentInput.value = "";
 
-        // Basic validation: Don't add empty tasks
-        if (titleInput.value.trim() === '') {
-            alert('Please enter a task title.');
-            return;
+    displayPosts();
+}
+
+// DISPLAY
+function displayPosts() {
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    let search = searchInput.value.toLowerCase();
+    let output = "";
+
+    posts.forEach((p,i)=>{
+        if(p.title.toLowerCase().includes(search)){
+            output += `
+            <div class="post ${p.done?'completed':''}">
+                <span class="tag ${p.category}">${p.category}</span>
+                <h3>${p.title}</h3>
+                <p>${p.content}</p>
+
+                <button onclick="markDone(${i})">✔</button>
+                <button onclick="remind(${i})">🔔</button>
+                <button onclick="editPost(${i})">✏</button>
+                <button onclick="deletePost(${i})">❌</button>
+            </div>`;
         }
+    });
 
-        const newTask = {
-            id: Date.now(), // Generate a unique ID based on the current time
-            title: titleInput.value.trim(),
-            desc: descInput.value.trim(),
-            tag: tagInput.value.trim() || 'General', // Default tag if empty
-            completed: false
-        };
+    posts.innerHTML = output;
+    document.getElementById("posts").innerHTML = output;
+}
 
-        tasks.push(newTask);
-        saveTasks();
-        renderTasks();
+// FUNCTIONS
+function markDone(i){
+    let p = JSON.parse(localStorage.getItem("posts"));
+    p[i].done = !p[i].done;
+    localStorage.setItem("posts", JSON.stringify(p));
+    displayPosts();
+}
 
-        // Clear the input fields after adding
-        titleInput.value = '';
-        descInput.value = '';
-        tagInput.value = '';
-    }
+function deletePost(i){
+    let p = JSON.parse(localStorage.getItem("posts"));
+    p.splice(i,1);
+    localStorage.setItem("posts", JSON.stringify(p));
+    displayPosts();
+}
 
-    function toggleComplete(id) {
-        // Find the task and flip its completed status
-        const task = tasks.find(t => t.id === id);
-        if (task) {
-            task.completed = !task.completed;
-            saveTasks();
-            renderTasks();
+function editPost(i){
+    let p = JSON.parse(localStorage.getItem("posts"));
+    titleInput.value = p[i].title;
+    contentInput.value = p[i].content;
+    categoryInput.value = p[i].category;
+    editIndex = i;
+}
+
+function remind(i){
+    let p = JSON.parse(localStorage.getItem("posts"));
+    if(p[i].done){
+        alert("Done 😎");
+    } else {
+        if(Notification.permission==="granted"){
+            new Notification("🔔 Reminder!",{body:p[i].title});
+        } else {
+            alert("Finish this!");
         }
     }
+}
 
-    function deleteTask(id) {
-        // Filter out the task with the matching ID
-        tasks = tasks.filter(t => t.id !== id);
-        saveTasks();
-        renderTasks();
-    }
+function toggleTheme(){
+    document.body.classList.toggle("light");
+}
 
-    function searchTasks() {
-        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        renderTasks(searchTerm);
-    }
+window.onload = displayPosts;
 
-    function renderTasks(filterText = '') {
-        const taskListContainer = document.getElementById('taskList');
-        taskListContainer.innerHTML = ''; // Clear current list
-
-        // Filter tasks if a search term exists
-        const filteredTasks = tasks.filter(task => 
-            task.title.toLowerCase().includes(filterText) || 
-            task.desc.toLowerCase().includes(filterText) ||
-            task.tag.toLowerCase().includes(filterText)
-        );
-
-        // Empty state handling
-        if (filteredTasks.length === 0) {
-            taskListContainer.innerHTML = `<div class="empty-state">No tasks found. Add one above!</div>`;
-            return;
-        }
-
-        // Build HTML for each task
-        filteredTasks.forEach(task => {
-            const taskCard = document.createElement('div');
-            taskCard.className = `task-card ${task.completed ? 'completed' : ''}`;
-            
-            taskCard.innerHTML = `
-                <div class="tag">${task.tag}</div>
-                <h3 class="task-title">${task.title}</h3>
-                <p class="task-desc">${task.desc}</p>
-                <div class="task-actions">
-                    <button class="action-btn btn-done" onclick="toggleComplete(${task.id})">
-                        ${task.completed ? 'Undo' : '✔ Done'}
-                    </button>
-                    <button class="action-btn btn-delete" onclick="deleteTask(${task.id})">✖ Delete</button>
-                </div>
-            `;
-            
-            taskListContainer.appendChild(taskCard);
-        });
-    }
+// SHORTCUT VARIABLES
+const titleInput = document.getElementById("title");
+const contentInput = document.getElementById("content");
+const categoryInput = document.getElementById("category");
+const searchInput = document.getElementById("search");
 </script>
 
 </body>
