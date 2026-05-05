@@ -79,7 +79,7 @@ button {
     width: 90%;
 }
 
-/* LANGUAGE BAR */
+/* 🔥 LANGUAGE BAR */
 .lang-box {
     background: #1a1a1a;
     padding: 15px;
@@ -114,6 +114,7 @@ button {
 .dot.js { background:#f1e05a; }
 .dot.css { background:#563d7c; }
 .dot.html { background:#e34c26; }
+
 </style>
 </head>
 
@@ -143,7 +144,7 @@ button {
 <!-- POSTS -->
 <div id="posts"></div>
 
-<!-- LANGUAGE BAR -->
+<!-- 🔥 LANGUAGE BAR -->
 <div class="lang-box">
 <h3>Languages</h3>
 
@@ -160,8 +161,81 @@ button {
 </div>
 </div>
 
-<!-- LINK JS FILE -->
-<script src="script.js"></script>
+<script>
+let editIndex = -1;
+
+// ADD
+function addPost(){
+    let title = document.getElementById("title").value;
+    let content = document.getElementById("content").value;
+    let category = document.getElementById("category").value;
+
+    if(!title || !content) return alert("Fill all fields");
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+    posts.push({title, content, category, done:false});
+    localStorage.setItem("posts", JSON.stringify(posts));
+
+    document.getElementById("title").value="";
+    document.getElementById("content").value="";
+
+    displayPosts();
+}
+
+// DISPLAY
+function displayPosts(){
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    let search = document.getElementById("search").value.toLowerCase();
+
+    let output="";
+
+    posts.forEach((p,i)=>{
+        if(p.title.toLowerCase().includes(search)){
+            output += `
+            <div class="post ${p.done?'completed':''}">
+                <span class="tag ${p.category}">${p.category}</span>
+                <h3>${p.title}</h3>
+                <p>${p.content}</p>
+
+                <button onclick="markDone(${i})">✔</button>
+                <button onclick="remind(${i})">🔔</button>
+                <button onclick="deletePost(${i})">❌</button>
+            </div>`;
+        }
+    });
+
+    document.getElementById("posts").innerHTML = output;
+}
+
+// DONE
+function markDone(i){
+    let posts = JSON.parse(localStorage.getItem("posts"));
+    posts[i].done = !posts[i].done;
+    localStorage.setItem("posts", JSON.stringify(posts));
+    displayPosts();
+}
+
+// DELETE
+function deletePost(i){
+    let posts = JSON.parse(localStorage.getItem("posts"));
+    posts.splice(i,1);
+    localStorage.setItem("posts", JSON.stringify(posts));
+    displayPosts();
+}
+
+// REMINDER
+function remind(i){
+    let posts = JSON.parse(localStorage.getItem("posts"));
+    if(posts[i].done){
+        alert("Done 😎");
+    } else {
+        alert("🔔 Complete this task!");
+    }
+}
+
+window.onload = displayPosts;
+</script>
 
 </body>
 </html>
